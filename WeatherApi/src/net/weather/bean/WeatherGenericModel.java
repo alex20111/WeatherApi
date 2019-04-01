@@ -1,5 +1,6 @@
 package net.weather.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.weather.utils.MessageHandl;
@@ -121,6 +122,18 @@ public class WeatherGenericModel
 	}
 	public MessageHandl getMessages() {
 		return messages;
+	}
+	public void addMessage(String title, String message, int type) {
+		List<Message> msgs = new ArrayList<Message>();
+		Message msg = new Message(type, title, message);
+		if (messages == null) {
+			msgs.add(msg);
+			messages = new MessageHandl(msgs);
+		}else {
+			msgs = messages.getAllMessages();
+			msgs.add(msg);
+			messages.setAllMessages(msgs);
+		}
 	}
 	@Override
 	public String toString()

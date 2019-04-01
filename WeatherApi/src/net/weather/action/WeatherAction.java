@@ -2,6 +2,7 @@ package net.weather.action;
 
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -19,7 +20,6 @@ import net.weather.enums.EnvCanLang;
 import net.weather.enums.Host;
 import net.weather.readers.WeatherUndergrdReader;
 import net.weather.readers.RSSEnvCanadaParser;
-import net.weather.utils.FileHandlingUtils;
 import net.weather.utils.Utilities;
 //5af84b428c068844
 /**
@@ -29,6 +29,7 @@ import net.weather.utils.Utilities;
  */
 public class WeatherAction 
 {
+	private static String ENV_CAN_CITIES_LINK = "https://weather.gc.ca/gps/js/cityLatLon.js";
 	/**
 	 *  get weather by City code
 	 *  
@@ -259,6 +260,10 @@ public class WeatherAction
 		return wls;
 
 	}
+	public static WeatherGenericModel getEnvironmentCanadaRSSWeather(City city, EnvCanLang lang, boolean getHourlyContent, boolean getIcons) throws Exception
+	{
+		return getEnvironmentCanadaRSSWeather(city.key, null, lang, getHourlyContent, getIcons);
+	}
 	/**
 	 * Get the RSS for environment Canada by City.
 	 * 
@@ -332,15 +337,19 @@ public class WeatherAction
 
 		return wgm;
 	}	
-	public static List<City> getEnvCanLocationByLatLong(double latitude, double longitude, Proxy proxy, boolean loadAllCities) throws MalformedURLException, Exception{
+	public static List<City> getEnvCanLocationByLatLong(double latitude, double longitude, Proxy proxy, boolean loadAllCities, boolean fromFile) throws MalformedURLException, Exception{
 
 		//set the proxy 
 		Utilities.proxy = proxy;
 
 		List<City> finalCities = new ArrayList<City>();
 		
-//		String citiesArray = Utilities.readUrl(new URL("http://weather.gc.ca/gps/js/cityLatLon.js"));//TODO restore to web
-		String citiesArray = FileHandlingUtils.readFileToString("c:\\temp\\envcancity.txt");
+		String citiesArray = ""; 
+		if (fromFile) {
+			citiesArray = loadCitiesFromFile();
+		}else {
+			citiesArray = Utilities.readUrl(new URL(ENV_CAN_CITIES_LINK));
+		}
 
 		//trim the array
 		if (citiesArray != null && citiesArray.length() > 0){
@@ -382,20 +391,12 @@ public class WeatherAction
 		String citiesArray = "";
 		
 		if (fromFile){
-			InputStream in = WeatherAction.class.getResourceAsStream("envCanCity.txt"); 
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			
-			StringBuilder sb = new StringBuilder();
-			 String line;
-			    while ((line = reader.readLine()) != null) {
-			        sb.append(line);
-			    }
-			
-			    citiesArray = sb.toString();
+		
+			    citiesArray = loadCitiesFromFile();
 		}
 		else
 		{
-			citiesArray = Utilities.readUrl(new URL("https://weather.gc.ca/gps/js/cityLatLon.js"));
+			citiesArray = Utilities.readUrl(new URL(ENV_CAN_CITIES_LINK));
 		}
 			
 		
@@ -457,6 +458,15 @@ public class WeatherAction
 		return finalCities;
 	}
 	
+	public static List<City> loadAllEnvCanCities(boolean fromFile) throws MalformedURLException, Exception{
+		if(fromFile) {
+			return loadEnvCanEssCities(loadCitiesFromFile());
+		}else {
+			return  loadEnvCanEssCities(Utilities.readUrl(new URL(ENV_CAN_CITIES_LINK)));
+		}
+		
+	}
+	
 	private static List<City> loadEnvCanEssCities(String citiesArray){
 		
 		List<City> cityList = new ArrayList<City>();
@@ -491,5 +501,15 @@ public class WeatherAction
 		}
 		
 		return cityList;
+	}
+	private static String loadCitiesFromFile() throws IOException {
+		InputStream in = WeatherAction.class.getResourceAsStream("envCanCity.txt");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		StringBuilder sb = new StringBuilder();
+		String line;
+		while((line = reader.readLine()) != null) {
+			sb.append(line);
+		}
+		return sb.toString();
 	}
 }

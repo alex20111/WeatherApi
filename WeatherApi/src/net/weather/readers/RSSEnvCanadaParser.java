@@ -333,6 +333,10 @@ public class RSSEnvCanadaParser
 				{					
 					wfm.setHighTemp(title.substring(title.indexOf("High") + "high plus".length() + 1, title.lastIndexOf(".")));
 				}
+				else if (title.contains("High minus"))
+				{					
+					wfm.setHighTemp(title.substring(title.indexOf("High") + "high minus".length() + 1, title.lastIndexOf(".")));
+				}
 				else
 				{			
 					wfm.setHighTemp(title.substring(title.indexOf("High") + "high".length() + 1, title.lastIndexOf(".")));
@@ -366,12 +370,7 @@ public class RSSEnvCanadaParser
 					lowTemp = lowTemp.substring(0,lowTemp.indexOf(".")) ;
 				}
 
-				//if there is more than 1 char.
-				if (lowTemp.length() > 1)
-				{
-					lowTemp = lowTemp.substring(0,2);
-				}
-
+			
 				wfm.setLowTemp(lowTemp);
 			}
 
@@ -463,12 +462,7 @@ public class RSSEnvCanadaParser
 					lowTemp = lowTemp.substring(0,lowTemp.indexOf(".")) ;
 				}
 
-				//if there is more than 1 char.
-				if (lowTemp.length() > 1)
-				{
-					lowTemp = lowTemp.substring(0,2);
-				}
-
+		
 				wfm.setLowTemp(lowTemp);
 			}
 

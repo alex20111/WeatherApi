@@ -66,4 +66,17 @@ public class MessageHandl {
 	public int messageCount(){
 		return this.msgs.size();
 	}
+	public List<Message> getAllMessages(){
+		return msgs;
+	}
+	public void setAllMessages(List<Message> messages) {
+		this.msgs = messages;
+	}
+	public String returnFormattedMessages() {
+		StringBuilder sb = new StringBuilder();
+		for(Message m : msgs) {
+			sb.append("Title: " + m.getTitle() + "\nMessage: " + m.getMessage() + "\nType: " + (m.getType() == Message.INFO? "INFO" : "ERROR") );
+		}
+		return sb.toString();
+	}
 }
