@@ -1,7 +1,7 @@
 package net.weather.enums;
 
 public enum Host {
-	envCanada("weather.gc.ca", "Env Canada"), weatherUnderground("api.wunderground.com","Weather Underground");
+	envCanada("weather.gc.ca", "Env Canada"), DARKSKY("api.darksky.net","Dark Sky");
 	
 	private String host = "";
 	private String name = "";

@@ -29,7 +29,7 @@ import net.weather.bean.WeatherCurrentModel;
 import net.weather.bean.WeatherForecastModel;
 import net.weather.bean.WeatherGenericModel;
 import net.weather.bean.WeatherHourlyModel;
-import net.weather.enums.EnvCanLang;
+import net.weather.enums.WeatherLang;
 import net.weather.enums.Host;
 import net.weather.utils.MessageHandl;
 import net.weather.utils.Utilities;
@@ -93,7 +93,7 @@ public class RSSEnvCanadaParser
 	 * @throws FeedException
 	 * @throws IOException
 	 */
-	public WeatherGenericModel readFeed(EnvCanLang lang) throws Exception
+	public WeatherGenericModel readFeed(WeatherLang lang) throws Exception
 	{	
         SyndFeedInput input = new SyndFeedInput();
 
@@ -146,7 +146,7 @@ public class RSSEnvCanadaParser
         		{
         			WeatherForecastModel wfm = null;
         			
-        			if (lang == EnvCanLang.french )
+        			if (lang == WeatherLang.french )
         			{
         				wfm = setWthForecastFr(entry.getTitle(),entry.getPublishedDate(), entry.getDescription().getValue() );
         			}
@@ -218,7 +218,7 @@ public class RSSEnvCanadaParser
 				{
 					if (s.startsWith("Condition"))
 					{
-						wcm.setWeather(s.substring(s.indexOf(">") + 2).trim());
+						wcm.setSummary(s.substring(s.indexOf(">") + 2).trim());
 						
 						//only set icons when we have them
 						if (getIcons)
@@ -249,11 +249,11 @@ public class RSSEnvCanadaParser
 						{							
 							float tempFloat = Float.valueOf(tempFinal);
 
-							wcm.setCurrectTempC(tempFloat);
+							wcm.setCurrTemp(tempFloat);
 						}
 						catch(NumberFormatException nfx)
 						{		
-							wcm.setCurrectTempC(0f);
+							wcm.setCurrTemp(0f);
 						}
 					}
 					else if(s.startsWith("Pressure") || s.startsWith("Pression"))
@@ -262,7 +262,7 @@ public class RSSEnvCanadaParser
 					}
 					else if(s.startsWith("Visibility") || s.startsWith("Visibilité"))
 					{
-						wcm.setVisibilityKm(s.substring(s.indexOf(">") + 2).trim());
+						wcm.setVisibility(s.substring(s.indexOf(">") + 2).trim());
 					}
 					else if(s.startsWith("Humidity") || s.startsWith("Humidité"))
 					{
@@ -486,7 +486,7 @@ public class RSSEnvCanadaParser
 	 * set Weather alerts.
 	 * @return
 	 */
-	private String setAlert(String link, EnvCanLang lang)
+	private String setAlert(String link, WeatherLang lang)
 	{
 		StringBuilder alertVal = new StringBuilder();
 		try {		
@@ -611,7 +611,7 @@ public class RSSEnvCanadaParser
 			
 			whm.setDate(cal.getTime());
 			whm.setAbbrDate(hours.get(i).text());
-			whm.setTempC(temp.get(i).text());
+			whm.setTemp(temp.get(i).text());
 			whm.setPop(pop.get(i).text());
 			whm.setWeatherCond(wthCond.get(i).text());
 			whm.setWind(wind.get(i).text().replace("Â", ""));

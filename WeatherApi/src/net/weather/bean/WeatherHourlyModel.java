@@ -12,12 +12,14 @@ public class WeatherHourlyModel
 	
 	private Date date;
 	private String abbrDate		= "";
-	private String tempC 		= "";
+	private String temp 		= "";
 	private String weatherCond 	= "";
 	private String pop 			= "";
 	private String wind 		= "";
 	private String humidex		= "";
 	private String windChill 	= "";
+	private String uvIndex 		= "";
+	private String humidity		= "";
 	
 	private String icon			= "";
 	/**
@@ -35,14 +37,14 @@ public class WeatherHourlyModel
 	/**
 	 * @return the tempC
 	 */
-	public String getTempC() {
-		return tempC;
+	public String getTemp() {
+		return temp;
 	}
 	/**
 	 * @param tempC the tempC to set
 	 */
-	public void setTempC(String tempC) {
-		this.tempC = tempC;
+	public void setTemp(String temp) {
+		this.temp = temp;
 	}
 	/**
 	 * @return the weatherCond
@@ -128,13 +130,25 @@ public class WeatherHourlyModel
 	public void setAbbrDate(String abbrDate) {
 		this.abbrDate = abbrDate;
 	}
+	public String getUvIndex() {
+		return uvIndex;
+	}
+	public void setUvIndex(String uvIndex) {
+		this.uvIndex = uvIndex;
+	}
+	public String getHumidity() {
+		return humidity;
+	}
+	public void setHumidity(String humidity) {
+		this.humidity = humidity;
+	}
 	@Override
 	public String toString() 
 	{			
 		StringBuilder sb = new StringBuilder();
 		sb.append("Date						  	: " + this.date + "\n");
 		sb.append("abbrDate						: " + this.abbrDate + "\n");
-		sb.append("tempC					  	: " + this.tempC + "\n");
+		sb.append("tempC					  	: " + this.temp + "\n");
 		sb.append("Weather condition		  	: " + this.weatherCond + "\n");
 		sb.append("Probability of precipitation: " + this.pop + "\n");
 		sb.append("wind						  	: " + this.wind + "\n");

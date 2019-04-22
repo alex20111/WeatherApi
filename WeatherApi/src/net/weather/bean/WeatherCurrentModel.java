@@ -4,17 +4,18 @@ public class WeatherCurrentModel
 {	
 
 	private String observationTime 	= "";
-	private String weather 			= "";
-	private float currectTempC 		= 0;
+	private String summary 			= "";
+	private float  currTemp 		= 0;
 	private String humidity			= "";
 	private String windDirectionText = "";
 	private String windGusting 		= "";
+	private String windSpeed		= "";
 	private String feelsLike 		= ""; //heat index
-	private String precipLastHour	= "";
-	private String precipToday 		= "";
+	private String precipIntensity	= "";
+	private String precipProbability	= "";
 	private String iconUrl			= "";
 	private String iconName			= "";
-	private String visibilityKm 	= "";
+	private String visibility 		= "";
 	private String pressureMb 		= "";
 	private String dewPointC 		= "";
 	private String windChill 		= "";
@@ -23,11 +24,21 @@ public class WeatherCurrentModel
 	private String sunRise 			= "";
 	private String sunSet 			= "";
 	private String uvIndex 			= "";
+	private String nearestStormDistance = "";
+	private String nearestStormBearing = "";
 	/**
 	 * @return the observationTime
 	 */
 	public String getObservationTime() {
 		return observationTime;
+	}
+
+	public float getCurrTemp() {
+		return currTemp;
+	}
+
+	public void setCurrTemp(float currTemp) {
+		this.currTemp = currTemp;
 	}
 
 	public void setObservationTime(String observationTime) {
@@ -36,26 +47,14 @@ public class WeatherCurrentModel
 	/**
 	 * @return the weather
 	 */
-	public String getWeather() {
-		return weather;
+	public String getSummary() {
+		return summary;
 	}
 	/**
 	 * @param weather the weather to set
 	 */
-	public void setWeather(String weather) {
-		this.weather = weather;
-	}
-	/**
-	 * @return the currectTempC
-	 */
-	public float getCurrectTempC() {
-		return currectTempC;
-	}
-	/**
-	 * @param currectTempC the currectTempC to set
-	 */
-	public void setCurrectTempC(float currectTempC) {
-		this.currectTempC = currectTempC;
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 	/**
 	 * @return the humidity
@@ -93,30 +92,30 @@ public class WeatherCurrentModel
 	public void setFeelsLike(String feelsLike) {
 		this.feelsLike = feelsLike;
 	}
-	/**
-	 * @return the precipLastHour
-	 */
-	public String getPrecipLastHour() {
-		return precipLastHour;
+	public String getWindSpeed() {
+		return windSpeed;
 	}
-	/**
-	 * @param precipLastHour the precipLastHour to set
-	 */
-	public void setPrecipLastHour(String precipLastHour) {
-		this.precipLastHour = precipLastHour;
+
+	public void setWindSpeed(String windSpeed) {
+		this.windSpeed = windSpeed;
 	}
-	/**
-	 * @return the precipToday
-	 */
-	public String getPrecipToday() {
-		return precipToday;
+
+	public String getPrecipIntensity() {
+		return precipIntensity;
 	}
-	/**
-	 * @param precipToday the precipToday to set
-	 */
-	public void setPrecipToday(String precipToday) {
-		this.precipToday = precipToday;
+
+	public void setPrecipIntensity(String precipIntensity) {
+		this.precipIntensity = precipIntensity;
 	}
+
+	public String getPrecipProbability() {
+		return precipProbability;
+	}
+
+	public void setPrecipProbability(String precipProbability) {
+		this.precipProbability = precipProbability;
+	}
+
 	/**
 	 * @return the windGusting
 	 */
@@ -145,14 +144,14 @@ public class WeatherCurrentModel
 	/**
 	 * @return the visibility
 	 */
-	public String getVisibilityKm() {
-		return visibilityKm;
+	public String getVisibility() {
+		return visibility;
 	}
 	/**
 	 * @param visibility the visibility to set
 	 */
-	public void setVisibilityKm(String visibilityKm) {
-		this.visibilityKm = visibilityKm;
+	public void setVisibility(String visibility) {
+		this.visibility = visibility;
 	}
 	/**
 	 * @return the pressure
@@ -172,6 +171,22 @@ public class WeatherCurrentModel
 	public String getDewPointC() {
 		return dewPointC;
 	}
+	public String getNearestStormDistance() {
+		return nearestStormDistance;
+	}
+
+	public void setNearestStormDistance(String nearestStormDistance) {
+		this.nearestStormDistance = nearestStormDistance;
+	}
+
+	public String getNearestStormBearing() {
+		return nearestStormBearing;
+	}
+
+	public void setNearestStormBearing(String nearestStormBearing) {
+		this.nearestStormBearing = nearestStormBearing;
+	}
+
 	/**
 	 * @param dewPointC the dewPointC to set
 	 */
@@ -260,17 +275,18 @@ public class WeatherCurrentModel
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append(this.observationTime + "\n");
-		sb.append("Weather    : " + this.weather + "\n");
-		sb.append("Temperature: " + this.currectTempC + "\n");
+		sb.append("Weather    : " + this.summary + "\n");
+		sb.append("Temperature: " + this.currTemp + "\n");
 		sb.append("humidity   : " + this.humidity + "\n");
 		sb.append("Wind Direction: " + this.windDirectionText + "\n");
 		sb.append("Wind Gusting: " + this.windGusting + "\n");
+		sb.append("Wind speed: " + this.windSpeed + "\n");
 		sb.append("Pressure  : " + this.pressureMb + "\n");
-		sb.append("Visibility: " + this.visibilityKm + "\n");
+		sb.append("Visibility: " + this.visibility + "\n");
 		sb.append("Dew Point : " + this.dewPointC + "\n");
 		sb.append("Wind Chill: " + this.windChill + "\n");
-		sb.append("precipLastHour: " + this.precipLastHour + "\n");
-		sb.append("precipToday: " + this.precipToday + "\n");
+		sb.append("precipIntensity: " + this.precipIntensity + "\n");
+		sb.append("precipProbability: " + this.precipProbability + "\n");
 		sb.append("icon    : " + this.iconName + "\n");
 		sb.append("iconHttp    : " + this.iconUrl + "\n");
 		sb.append("moonRise: " + this.moonRise + "\n");
@@ -278,6 +294,9 @@ public class WeatherCurrentModel
 		sb.append("sunRise : " + this.sunRise + "\n");
 		sb.append("sunSet  : " + this.sunSet + "\n");
 		sb.append("feelsLike   : " + this.feelsLike + "\n");
+		sb.append("uvIndex   : " + this.uvIndex + "\n");
+		sb.append("nearestStormBearing   : " + this.nearestStormBearing + "\n");
+		sb.append("nearestStormDistance   : " + this.nearestStormDistance + "\n");
 	
 		return sb.toString();
 	}

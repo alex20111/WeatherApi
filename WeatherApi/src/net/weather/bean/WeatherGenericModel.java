@@ -13,6 +13,7 @@ public class WeatherGenericModel
 	private String latitude 	= "";
 	private String location 	= "";	
 	private String forcastDate 	= "";	
+	private String timezone = "";
 	private WeatherCurrentModel weatherCurrentModel;
 	private List<WeatherForecastModel> wForecastModel;
 	private List<WeatherHourlyModel> weatherHourlyModel;
@@ -134,6 +135,12 @@ public class WeatherGenericModel
 			msgs.add(msg);
 			messages.setAllMessages(msgs);
 		}
+	}
+	public String getTimezone() {
+		return timezone;
+	}
+	public void setTimezone(String timezone) {
+		this.timezone = timezone;
 	}
 	@Override
 	public String toString()

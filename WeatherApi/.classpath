@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="D:/javaUtil/jars/gson-2.2.4.jar"/>
-	<classpathentry kind="lib" path="D:/javaUtil/jars/jdom.jar"/>
-	<classpathentry kind="lib" path="D:/javaUtil/jars/jsoup-1.7.3.jar"/>
-	<classpathentry kind="lib" path="D:/javaUtil/jars/rome-1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="D:/javaUtil/jars/commons-lang-2.6/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/dev/jars/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/dev/jars/gson-2.8.5.jar"/>
+	<classpathentry kind="lib" path="C:/dev/jars/jdom-1.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/dev/jars/jsoup-1.11.3.jar"/>
+	<classpathentry kind="lib" path="C:/dev/jars/rome-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
