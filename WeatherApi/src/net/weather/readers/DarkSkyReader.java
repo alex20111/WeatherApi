@@ -9,9 +9,11 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+import net.weather.bean.WeatherAlert;
 import net.weather.bean.WeatherCurrentModel;
 import net.weather.bean.WeatherForecastModel;
 import net.weather.bean.WeatherGenericModel;
+import net.weather.darksky.Alert;
 import net.weather.darksky.Currently;
 import net.weather.darksky.Daily;
 import net.weather.darksky.DarkSky;
@@ -77,13 +79,14 @@ public class DarkSkyReader {
 		wgm.setWForecastModel(wfms);
 		
 		
-		
-		
-//	      "nearestStormDistance":240,
-//	      "nearestStormBearing":157,
-//	      "cloudCover":0.42,
-//	      "ozone":340.93
-		
+		//TODO re-do alerts
+		if (p.getAlerts() != null && p.getAlerts().size() > 0) {
+			WeatherAlert alerts = new WeatherAlert();
+			for(Alert al : p.getAlerts()) {
+				alerts.setMessage("allo");
+				alerts.setDescription(al.getDescription());
+			}
+		}
 		
 		
 		wgm.setWeatherCurrentModel(wcm);

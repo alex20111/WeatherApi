@@ -33,7 +33,7 @@ public class WeatherAction {
 	private static String ENV_CAN_CITIES_LINK = "https://weather.gc.ca/gps/js/cityLatLon.js";
 
 	//https://api.darksky.net/forecast/[key]/[latitude],[longitude]     //3a35ddf8a53ed69c8860e568c4f0a4f9
-	public static WeatherGenericModel getDarkSkyForecast(long latitude, long longitude, List<DarkSkyExclude> exclude, DarkSkyUnits units, WeatherLang lang) throws Exception {
+	public static WeatherGenericModel getDarkSkyForecast(double latitude, double longitude, List<DarkSkyExclude> exclude, DarkSkyUnits units, WeatherLang lang) throws Exception {
 
 		City city = new City();
 		city.setLat(String.valueOf(latitude));
@@ -80,8 +80,6 @@ public class WeatherAction {
 		URL url = new URL(link);
 
 		String content = Utilities.readUrl(url);
-
-		System.out.println("Content: " + content);
 		
 		 DarkSkyReader reader = new DarkSkyReader();
 		 WeatherGenericModel wgm = reader.generateModel(content);

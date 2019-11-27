@@ -42,39 +42,29 @@ public class TestAction {
 //		List<City> cities =  WeatherAction.getEnvCanLocationByCityName("ottawa", false);
 //		System.out.println(cities);
 //		
-//			WeatherGenericModel wgm =  WeatherAction.getEnvironmentCanadaRSSWeather("on-118", EnvCanLang.english, true, true);
+			WeatherGenericModel wgm =  WeatherAction.getEnvironmentCanadaRSSWeather("on-118", WeatherLang.english, true, true);
 ////		 WeatherGenericModel wgm =  WeatherAction.getWeatherByCity("5af84b428c068844", "canada", "ottawa");//ByAirportCode("5af84b428c068844", "YOW"); WEATHER UNDERGROUND
 //		//WeatherGenericModel wgm =  WeatherAction.getWeatherByAirportCode("yow");
-//			System.out.println(wgm);
+			System.out.println(wgm);
 			
 
-//
-//			
-//			
-//		} catch (Exception e) {
-//
-//			e.printStackTrace();
-//		}
+
 		
 		
+//		List<City> cities = WeatherAction.getEnvCanLocationByCityName("ottawa",true);
+//		
+//		City city = cities.get(0);
+//		
+//		List<DarkSkyExclude> ex = new ArrayList<DarkSkyExclude>();
+////		ex.add(DarkSkyExclude.HOURLY);
+////		ex.add(DarkSkyExclude.MINUTELY);
+//		
+//		System.out.println("Getting from city: " + city);
+//		WeatherGenericModel wgm = WeatherAction.getDarkSkyForecast(city, DarkSkyUnits.SI, ex, WeatherLang.english);
+//		
+//		System.out.println(wgm);
+//		
 		
-		List<City> cities = WeatherAction.getEnvCanLocationByCityName("ottawa",true);
-		
-		City city = cities.get(0);
-		
-		List<DarkSkyExclude> ex = new ArrayList<DarkSkyExclude>();
-//		ex.add(DarkSkyExclude.HOURLY);
-//		ex.add(DarkSkyExclude.MINUTELY);
-		
-		System.out.println("Getting from city: " + city);
-		WeatherGenericModel wgm = WeatherAction.getDarkSkyForecast(city, DarkSkyUnits.SI, ex, WeatherLang.english);
-		
-		System.out.println(wgm);
-		
-//		readDarkSky();
-			
-	
-			
 			
 	}
 	private static void readDarkSky() throws Exception {  //C:\dev\jsonJava
