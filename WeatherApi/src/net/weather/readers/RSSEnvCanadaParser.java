@@ -30,6 +30,7 @@ import net.weather.bean.WeatherForecastModel;
 import net.weather.bean.WeatherGenericModel;
 import net.weather.bean.WeatherHourlyModel;
 import net.weather.enums.WeatherLang;
+import net.weather.enums.EnvCanAlertLvl;
 import net.weather.enums.Host;
 import net.weather.utils.MessageHandl;
 import net.weather.utils.Utilities;
@@ -164,8 +165,10 @@ public class RSSEnvCanadaParser
         				  ( categories.equals(ALERT_FR) && !"Aucune veille ou alerte en vigueur.".equals(entry.getDescription().getValue()) ) )
 				{							
 					WeatherAlert wAlert = new WeatherAlert();
-					wAlert.setDescription(entry.getTitle());					
-					wAlert.setMessage(setAlert(entry.getLink(), lang));
+					wAlert.setDescription(entry.getTitle());		
+					
+//					wAlert.setMessage(setAlert(wAlert, entry.getLink(), lang));
+					setAlert(wAlert, entry.getLink(), lang);
 					wgm.setWeatherAlert(wAlert);
         		}        		
         	}
@@ -486,10 +489,12 @@ public class RSSEnvCanadaParser
 	 * set Weather alerts.
 	 * @return
 	 */
-	private String setAlert(String link, WeatherLang lang)
+	private void setAlert(WeatherAlert wAlert, String link, WeatherLang lang)
 	{
 		StringBuilder alertVal = new StringBuilder();
+		String alertLevel = EnvCanAlertLvl.NOT_FOUND.getLevelText();
 		try {		
+			
 			
 			if (!link.startsWith("https")){
 				link = "https" +  link.substring(4, link.length());
@@ -501,10 +506,12 @@ public class RSSEnvCanadaParser
 			Document doc = Jsoup.parse(content);		
 
 			Elements description = doc.getElementsByAttributeValueContaining("class", "col-xs-12");
+//			System.out.println("description: " + description.html());
 
 			Document doc2 = Jsoup.parse(description.html());
 
 			Elements h2 = doc2.getElementsByTag("h2");
+//			System.out.println("h2: " + h2.html());
 			Elements issued = doc2.getElementsByTag("span");
 			Elements title = doc2.getElementsByTag("strong");
 			Elements ul = doc2.getElementsByTag("ul");
@@ -518,7 +525,10 @@ public class RSSEnvCanadaParser
 			{
 				alertVal.append(pppp.get(i));
 			}
-			alertVal.append("<br/> " + h2.text() + " Issued: " + issued.text() + "</html>");
+			
+			alertLevel = h2.get(0).text();
+			
+			alertVal.append("<br/> " + alertLevel + " Issued: " + issued.text() + "</html>");
 
 		} catch (MalformedURLException e)
 		{
@@ -529,8 +539,15 @@ public class RSSEnvCanadaParser
 			e.printStackTrace();
 			alertVal.append("Error Retreiving Alert web info " + e.getStackTrace()[0].getLineNumber() + " " + e.getMessage());
 		}
+		
+		wAlert.setMessage(alertVal.toString());
+		
+//		System.out.println("!!!!!!!!!!!!!!!!!!!!! H2 " + alertLevel);
+		
+	
+		wAlert.setLevel(EnvCanAlertLvl.getLevel(alertLevel).getLevelText());
 
-		return alertVal.toString();
+		
 	}
 	/**
 	 * populate the filename of the icons names

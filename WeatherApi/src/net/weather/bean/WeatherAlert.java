@@ -4,6 +4,9 @@ public class WeatherAlert {
 	
 	private String description = "";
 	private String message = "";
+	private String level = ""; //specify the level of the alert.
+	
+	
 	/**
 	 * @return the description
 	 */
@@ -29,6 +32,12 @@ public class WeatherAlert {
 		this.message = message;
 	}
 	
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
 	@Override
 	public String toString()
 	{
@@ -36,6 +45,7 @@ public class WeatherAlert {
 		
 		sb.append("Description: " + this.description + "\n");
 		sb.append("Message: " + this.message + "\n");
+		sb.append("Level: " + this.level + "\n");
 
 	
 		return sb.toString();
